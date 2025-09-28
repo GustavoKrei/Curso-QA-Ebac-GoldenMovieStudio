@@ -2,17 +2,25 @@
 
 
 describe('US-O12-Funcionalidade: Cadastro de membros', () => {
-  it('Cadastros de campos obrigatórios', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('#signup-firstname').type('Gustavo')
-    cy.get('#signup-lastname').type('Motta')
-    cy.get('#signup-email').type('guskrei3@gmail.com')
-    cy.get('#signup-phone').type('51989908994')
-    cy.get('#signup-password').type('Janela123!')
-    cy.get('#signup-button').click()
+  beforeEach(() => {
+    cy.visit('/')
+  });
+  
+    it('Cadastros de campos obrigatórios', () => {
+    var email = `gus${Date.now()}@gmail.com`
+    cy.preencherCadastro('Gustavo', 'Motta' , email, '51999999999', 'Teste123!')
     cy.get('#signup-response').should('contain' , 'Cadastro realizado com sucesso!')
 
 
-
+ 
   })
+    
+  it('Deve validar mensagem de erro com o campo nome inválido', () => {
+     cy.preencherCadastro('Gustavo10', 'Motta' , 'guskrei@teste.com', '51999999999', 'Teste123!')
+     cy.get('#signup-response').should('contain', 'Nome deve conter apenas caracteres alfabéticos, acentuados e espaços')
+  });
+
+
+
+
 })
