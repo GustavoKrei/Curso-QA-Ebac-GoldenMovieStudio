@@ -3,8 +3,12 @@
 
 describe('US-00: Funcionalidade: busca de filmes', () => {
     beforeEach(() => {
-        cy.visit('/')
+        cy.visit('https://golden-movie-studio.vercel.app/')
     });
+
+     afterEach(() => {
+        cy.screenshot()
+     });
 
     it('Deve buscar filmes com sucesso', () => {
         cy.get('#search-input').type('Matrix')

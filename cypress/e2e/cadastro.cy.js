@@ -3,8 +3,12 @@
 
 describe('US-O12-Funcionalidade: Cadastro de membros', () => {
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('https://golden-movie-studio.vercel.app/')
   });
+
+    afterEach(() => {
+      cy.screenshot()
+    });
   
     it('Cadastros de campos obrigatórios', () => {
     var email = `gus${Date.now()}@gmail.com`
